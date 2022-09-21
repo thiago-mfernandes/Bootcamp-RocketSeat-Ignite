@@ -15,46 +15,46 @@ module.exports = {
     entry: path.resolve(__dirname, 'src', 'index.jsx'),
     //arquivo de saida que vai ser gerado com o webpack(bundle.js) - output 
     output: {
-        //caminho e pasta
-        path: path.resolve(__dirname, 'dist'),
-        //nome do arquivo
-        filename: 'bundle.js'
+      //caminho e pasta
+      path: path.resolve(__dirname, 'dist'),
+      //nome do arquivo
+      filename: 'bundle.js'
     },
     resolve: {
-        //le e entende as extensoes
-        extensions: ['.js', '.jsx', 'ts', 'tsx'],
+      //le e entende as extensoes
+      extensions: ['.js', '.jsx', 'ts', 'tsx'],
     },
     devServer: {
-        //essa diretriz informa a pasta onde esta o index.html para que o webpack faz reload automatico
-        contentBase: path.resolve(__dirname, 'public')
+      //essa diretriz informa a pasta onde esta o index.html para que o webpack faz reload automatico
+      static: path.resolve(__dirname, 'public'),
     },
     plugins: [
-        //este plugin coloca o nome automaticamente do arquivo javascript gerado pelo wepack dentro do index.html
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public', 'index.html'), 
-        })
+      //este plugin coloca o nome automaticamente do arquivo javascript gerado pelo wepack dentro do index.html
+      new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, 'public', 'index.html'), 
+      })
     ],
     module: {
-        //como minha aplicacao vai lidar com cada tipo de arquivo
-        rules: [
-            {
-                //verifica se o arquivo possui esta extensao - JSX
-                test: /\.jsx$/,
-                exclude: /node_modules/,
-                use: 'babel-loader'
-            },
-            {
-                //verifica se o arquivo possui esta extensao - CSS
-                test: /\.css$/,
-                exclude: /node_modules/,
-                use: ['style-loader', 'css-loader'],
-            },
-            {
-                //verifica se o arquivo possui esta extensao - SCSS
-                test: /\.scss$/,
-                exclude: /node_modules/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
-            }
-        ]
+      //como minha aplicacao vai lidar com cada tipo de arquivo
+      rules: [
+        {
+          //verifica se o arquivo possui esta extensao - JSX
+          test: /\.jsx$/,
+          exclude: /node_modules/,
+          use: 'babel-loader'
+        },
+        {
+          //verifica se o arquivo possui esta extensao - CSS
+          test: /\.css$/,
+          exclude: /node_modules/,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          //verifica se o arquivo possui esta extensao - SCSS
+          test: /\.scss$/,
+          exclude: /node_modules/,
+          use: ['style-loader', 'css-loader', 'sass-loader'],
+        }
+      ]
     }
 }

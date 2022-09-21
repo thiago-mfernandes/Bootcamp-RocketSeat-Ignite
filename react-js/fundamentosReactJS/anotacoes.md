@@ -36,70 +36,12 @@ para nao ter que modificar o nome do arquivo no index.html, na tag script, usar 
 },
 
 - [x] - instalar: `yarn add style-loader css-loader -D`
-- [x] - instalar: `yarn node-sass -D`
+- [x] - instalar: `yarn add node-sass -D`
 - [x] - instalar: `yarn add sass-loader -D`
 
---------------------------------------------------------------------------------------------
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-//o path resolve a questao do caminho relativo dependendo do sistema operacional
-// __dirname procura a instrucao de acordo com o nome da pasta que estiver - no caso - src
-
-//- [x] - configurar dois ambientes: desenvolvimento e produção:
-
-const isDevelopment = process.env.NODE_ENV !==  'production';
-
-module.exports = {
-    mode: isDevelopment ? 'development' : 'production',
-    //configuracao para ver os erros do mesmo jeito que estou escrevendo o codigo - acesso ao codigo original
-    devtool: isDevelopment ? 'eval-source-map' : 'source-map',
-    entry: path.resolve(__dirname, 'src', 'index.jsx'),
-    //arquivo de saida - output 
-    output: {
-        //caminho e pasta
-        path: path.resolve(__dirname, 'dist'),
-        //nome do arquivo
-        filename: 'bundle.js'
-    },
-    resolve: {
-        //le e entende as extensoes
-        extensions: ['.js', '.jsx'],
-    },
-    devServer: {
-        //essa diretriz informa a pasta onde esta o index.html para que o webpack faz reload automatico
-        contentBase: path.resolve(__dirname, 'public')
-    },
-    plugins: [
-        //este plugin coloca o nome automaticamente do arquivo javascript gerado pelo wepack dentro do index.html
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public', 'index.hmtml'), 
-        })
-    ],
-    module: {
-        //como minha aplicacao vai lidar com cada tipo de arquivo
-        rules: [
-            {
-                //verifica se o arquivo possui esta extensao
-                test: /\.jsx$/,
-                exclude: /node_modules/,
-                use: 'babel-loader'
-            },
-            {
-                //verifica se o arquivo possui esta extensao
-                test: /\.css$/,
-                exclude: /node_modules/,
-                use: ['style-loader', 'css-loader'],
-            },
-            {
-                //verifica se o arquivo possui esta extensao
-                test: /\.scss$/,
-                exclude: /node_modules/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
-            }
-        ]
-    }
-}
 
 ## Conceitos Fndamentais
 
-- Um componente é uma funcao que devolve um HTML. Geralmente, o componente sempre comeca com letra maiuscula e um componente por arquivo, por convenção
+- Um componente é uma função que devolve um HTML. Geralmente, o componente sempre começa com letra maiuscula e um componente por arquivo, por convenção.
+
+- As propriedades funcionam como atributos das tags html, variaveis que eu posso passar para um componente funcionar de forma diferente.
