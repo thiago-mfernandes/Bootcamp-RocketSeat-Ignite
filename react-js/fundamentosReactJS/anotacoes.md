@@ -45,3 +45,14 @@ para nao ter que modificar o nome do arquivo no index.html, na tag script, usar 
 - Um componente é uma função que devolve um HTML. Geralmente, o componente sempre começa com letra maiuscula e um componente por arquivo, por convenção.
 
 - As propriedades funcionam como atributos das tags html, variaveis que eu posso passar para um componente funcionar de forma diferente.
+
+- Imutabilidade - nao alterar uma informacao ja feita e sim, criar uma nova variavel
+// usuarios = ['diego', 'thiago', 'rafael']
+
+// novosUsuarios = [ ...usuarios, 'joao']
+
+- [] `yarn add -D @pmmmwh/react-refresh-webpack-plugin react-refresh`
+
+## useEffect
+
+- serve para disparar uma funcao quando algo mudar na minha aplicacao, uma variavel mudar por exemplo

@@ -5,6 +5,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 //- [x] - configurar dois ambientes: desenvolvimento e produção:
 
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
 const isDevelopment = process.env.NODE_ENV !==  'production';
 
 module.exports = {
@@ -26,14 +28,17 @@ module.exports = {
     },
     devServer: {
       //essa diretriz informa a pasta onde esta o index.html para que o webpack faz reload automatico
-      static: path.resolve(__dirname, 'public'),
+      static: path.resolve(__dirname, './public'),
+      hot: true,
     },
     plugins: [
       //este plugin coloca o nome automaticamente do arquivo javascript gerado pelo wepack dentro do index.html
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'public', 'index.html'), 
-      })
-    ],
+      }),
+      //se eu estiver em ambiente de desenvolvimento, vou executar a funcao, caso nao esteja, retorno um false, e vai dar problema. O filter remove valores booleanos falsos, undefined null, 
+      isDevelopment && new ReactRefreshWebpackPlugin(),
+    ].filter(Boolean),
     module: {
       //como minha aplicacao vai lidar com cada tipo de arquivo
       rules: [
@@ -41,7 +46,15 @@ module.exports = {
           //verifica se o arquivo possui esta extensao - JSX
           test: /\.jsx$/,
           exclude: /node_modules/,
-          use: 'babel-loader'
+          use: {
+            loader: 'babel-loader',
+            options: {
+              plugins: [
+                isDevelopment && 
+                  require.resolve('react-refresh/babel'),
+              ].filter(Boolean),
+            },
+          },
         },
         {
           //verifica se o arquivo possui esta extensao - CSS
