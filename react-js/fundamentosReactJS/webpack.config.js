@@ -14,7 +14,7 @@ module.exports = {
     //configuracao para ver os erros do mesmo jeito que estou escrevendo o codigo - acesso ao codigo original
     devtool: isDevelopment ? 'eval-source-map' : 'source-map',
 
-    entry: path.resolve(__dirname, 'src', 'index.jsx'),
+    entry: path.resolve(__dirname, 'src', 'index.tsx'),
     //arquivo de saida que vai ser gerado com o webpack(bundle.js) - output 
     output: {
       //caminho e pasta
@@ -24,7 +24,7 @@ module.exports = {
     },
     resolve: {
       //le e entende as extensoes
-      extensions: ['.js', '.jsx', 'ts', 'tsx'],
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
     devServer: {
       //essa diretriz informa a pasta onde esta o index.html para que o webpack faz reload automatico
@@ -44,7 +44,7 @@ module.exports = {
       rules: [
         {
           //verifica se o arquivo possui esta extensao - JSX
-          test: /\.jsx$/,
+          test: /\.(j|t)sx$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
