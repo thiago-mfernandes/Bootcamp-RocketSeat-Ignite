@@ -1,0 +1,1 @@
+instalar: `yard add uuid`
