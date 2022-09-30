@@ -58,3 +58,13 @@ hhtp://enderecoservidor.com.br/v1/users/{id}
 
 rodar: `yarn init -y`
 rodar: `yarn add express`
+
+- [x] - reload no server
+rodar: `yarn add nodemon -D`
+- [x] - adicionar no package.json o caminho de entrada da aplicação para o Nodemon reestartar:
+
+"scripts": {
+  "dev": "nodemon src/index.js"
+}
+
+- [] - 
