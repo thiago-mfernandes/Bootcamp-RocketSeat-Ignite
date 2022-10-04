@@ -39,6 +39,7 @@ yarn add react-modal
 
         entao o filho pode alterar um estado no pai atraves da passagem de funcoes como propriedades
 
-
+- [] - funcoes para modificar cores
+`yarn add polished`
 
 
