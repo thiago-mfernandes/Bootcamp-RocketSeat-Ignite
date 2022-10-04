@@ -4,10 +4,9 @@ import { createServer, Model } from 'miragejs';
 import { App } from './App';
 
 createServer({
-
   //banco de dados interno do miragejs
   models: {
-    transaction: Model
+    transaction: Model,
   },
 
   //criar uma transaction fake para deixar a interface com dados pré-cadastrados
@@ -33,9 +32,6 @@ createServer({
       ],
     })
   },
-
-
-
   //quais sao as rotas da minha api ficticia:
   routes() {
     //chamadas com /api serao direciondas ao mirage
@@ -52,7 +48,7 @@ createServer({
       const data = JSON.parse(request.requestBody);
 
       //parametro 1: qual meu model. 2: quais sao meus dados
-      return schema.create('transactions', data)
+      return schema.create('transaction', data)
     })
   },
 })
