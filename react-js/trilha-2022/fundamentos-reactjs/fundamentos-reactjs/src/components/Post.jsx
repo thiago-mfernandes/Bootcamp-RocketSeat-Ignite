@@ -6,7 +6,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import { useState } from "react";
 
-export function Post({ author, content, publishedAt }) {
+export function Post({ author, content, publishedAt, id }) {
 
   const [comments, setComments] = useState(["Post muito maneiro, hein!"]);
   const [newComment, setNewComment] = useState("");
@@ -29,6 +29,7 @@ export function Post({ author, content, publishedAt }) {
   }
 
   function handleNewCommentChange() {
+    event.target.setCustomValidity("");
     setNewComment(event.target.value)
   }
 
@@ -39,6 +40,14 @@ export function Post({ author, content, publishedAt }) {
 
     setComments(commentsWithoutDeletedOne);
   }
+
+  function handleNewCommentInvalid() {
+    //verificar o que esta vindo no evento
+    console.log(event);
+    event.target.setCustomValidity("Esse campo é obrigatório.");
+  }
+
+  const isNewCommentEmpty = toString(newComment.length === 0);
 
   return (
     <article className={styles.post}>
@@ -84,9 +93,11 @@ export function Post({ author, content, publishedAt }) {
           value={newComment}
           onChange={handleNewCommentChange}
           placeholder="Deixe seu comentário"
+          onInvalid={handleNewCommentInvalid}
+          required
         />
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disable={isNewCommentEmpty}>Publicar</button>
         </footer>
       </form>
 
